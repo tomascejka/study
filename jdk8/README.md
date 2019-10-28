@@ -7,7 +7,8 @@
 + http://openjdk.java.net/projects/jdk8/ << project description
 + http://openjdk.java.net/projects/jdk8/features << new features
 + http://openjdk.java.net/projects/jdk8u << jdk updates
-+ https://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html << Oracle JDK
++ https://docs.oracle.com/javase/8/ << Oracle JDK docs
++ https://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html << Oracle JDK overview
 + https://www.oracle.com/technetwork/java/javase/documentation/8u-relnotes-2225394.html << release notes Oracle JDK
 
 ### Others
