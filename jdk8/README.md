@@ -1,5 +1,6 @@
 ## Local sources
-+ [What's New in JDK 8 - oracle description](https://github.com/tomascejka/study/blob/master/jdk8/what-is-new.md)
++ [What's New in JDK 8 - by oracle](https://github.com/tomascejka/study/blob/master/jdk8/what-is-new.md)
++ [Enhancements in Java SE 8 - by oracle](https://github.com/tomascejka/study/blob/master/jdk8/enhacements.md)
 
 ## Sources
 + http://openjdk.java.net/projects/jdk8/ << project description
