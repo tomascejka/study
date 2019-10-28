@@ -25,3 +25,4 @@
   + https://www.jesperdj.com/2018/09/30/jaxb-on-java-9-10-11-and-beyond/ << JAXB problem
   + https://blog.codefx.org/java/java-9-migration-guide/
   + https://blog.joda.org/2018/09/from-java-8-to-java-11.html
+  + https://docs.deistercloud.com/Technology.50/Java/Migration%20from%20java%208%20to%20java%209.xml?embedded=true
