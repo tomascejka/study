@@ -90,9 +90,9 @@ Java Platform, Standard Edition 8 is a major feature release. This document summ
   + JDK8 support for class files changes specified by JSR-292, JSR-308 and JSR-335
 
 * [IO and NIO](http://docs.oracle.com/javase/8/docs/technotes/guides/io/enhancements.html#jdk8)
-  + New SelectorProvider implementation for Solaris based on the Solaris event port mechanism. To use, run with the system property java.nio.channels.spi.Selector set to the value sun.nio.ch.EventPortSelectorProvider.
-  + Decrease in the size of the <JDK_HOME>/jre/lib/charsets.jar file
-  + Performance improvement for the java.lang.String(byte[], *) constructor and the java.lang.String.getBytes() method.
+  + New `SelectorProvider` implementation for Solaris based on the Solaris event port mechanism. To use, run with the system property `java.nio.channels.spi.Selector` set to the value `sun.nio.ch.EventPortSelectorProvider`.
+  + Decrease in the size of the `<JDK_HOME>/jre/lib/charsets.jar` file
+  + Performance improvement for the `java.lang.String(byte[], *)` constructor and the `java.lang.String.getBytes()` method.
 
  * [java.lang and java.util Packages](http://docs.oracle.com/javase/8/docs/technotes/guides/lang/enhancements.html#jdk8)
   + Parallel Array Sorting
@@ -101,21 +101,21 @@ Java Platform, Standard Edition 8 is a major feature release. This document summ
 
 * [JDBC](http://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/)
   + The JDBC-ODBC Bridge has been removed.
-  + JDBC 4.2 introduces new features.
+  + [JDBC 4.2](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/jdbc_42.html) introduces new features.
 
 * Java DB
   + JDK 8 includes Java DB 10.10.
 
  * [Networking](http://docs.oracle.com/javase/8/docs/technotes/guides/net/enhancements-8.0.html)
-  + The class java.net.URLPermission has been added.
-  + In the class java.net.HttpURLConnection, if a security manager is installed, calls that request to open a connection require permission.
+  + The class `java.net.URLPermission` has been added.
+  + In the class `java.net.HttpURLConnection`, if a security manager is installed, calls that request to open a connection require permission.
 
 * [Concurrency](http://docs.oracle.com/javase/8/docs/technotes/guides/concurrency/changes8.html)
-  + Classes and interfaces have been added to the java.util.concurrent package.
-  + Methods have been added to the java.util.concurrent.ConcurrentHashMap class to support aggregate operations based on the newly added streams facility and lambda expressions.
-  + Classes have been added to the java.util.concurrent.atomic package to support scalable updatable variables.
-  + Methods have been added to the java.util.concurrent.ForkJoinPool class to support a common pool.
-  + The java.util.concurrent.locks.StampedLock class has been added to provide a capability-based lock with three modes for controlling read/write access.
+  + Classes and interfaces have been added to the `java.util.concurrent` package.
+  + Methods have been added to the `java.util.concurrent.ConcurrentHashMap` class to support aggregate operations based on the newly added streams facility and lambda expressions.
+  + Classes have been added to the `java.util.concurrent.atomic` package to support scalable updatable variables.
+  + Methods have been added to the `java.util.concurrent.ForkJoinPool` class to support a common pool.
+  + The `java.util.concurrent.locks.StampedLock` class has been added to provide a capability-based lock with three modes for controlling read/write access.
 
 * [Java XML](http://docs.oracle.com/javase/8/docs/technotes/guides/xml/enhancements.html) - [JAXP](http://docs.oracle.com/javase/8/docs/technotes/guides/xml/jaxp/enhancements-8.html)
 
