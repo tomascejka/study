@@ -21,6 +21,7 @@
   + https://www.callicoder.com/java-lambda-expression-tutorial/
   + https://www.geeksforgeeks.org/lambda-expressions-java-8/
   + https://medium.com/@wkrzywiec/what-was-added-to-java-8-lambda-expressions-7b2735efb287
+  + https://dzone.com/articles/process-collections-easily-with-stream-in-java-8
   + https://www.programcreek.com/simple-java-8-lambdas/
   + https://www.beyondjava.net/performance-java-8-lambdas << <b>HOT</b>, velmi zajímavý článek
   + https://javaconceptoftheday.com/java-8-lambda-expressions/
@@ -30,6 +31,8 @@
   + http://tutorials.jenkov.com/java-functional-programming/streams.html  
   + https://www.baeldung.com/java-8-streams
   + https://stackify.com/streams-guide-java-8/
+  + https://dzone.com/articles/using-java-collectors
+  + https://dzone.com/articles/java-stream-collectors
 + Default method
   + https://jrebel.com/rebellabs/java-8-explained-default-methods/
 + JDBC 4.2
