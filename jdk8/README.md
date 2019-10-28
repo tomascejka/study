@@ -14,7 +14,7 @@
 ### Others
 + Common
   + http://voho.eu/wiki/java-zmeny-jdk8/
-  + http://voho.eu/wiki/java-zmeny-jdk9/
+  + https://www.baeldung.com/java-8-new-features
   + https://www.journaldev.com/2389/java-8-features-with-examples
 + Lambda
   + http://tutorials.jenkov.com/java/lambda-expressions.html
