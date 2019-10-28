@@ -4,46 +4,31 @@ source - https://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html
 Java Platform, Standard Edition 8 is a major feature release. This document summarizes features and enhancements in Java SE 8 and in JDK 8, Oracle's implementation of Java SE 8. Click the component name for a more detailed description of the enhancements for that component.
 
 * [Java Programming Language](https://docs.oracle.com/javase/8/docs/technotes/guides/language/enhancements.html#javase8)
-
   + Lambda Expressions, a new language feature, has been introduced in this release. They enable you to treat functionality as a method argument, or code as data. Lambda expressions let you express instances of single-method interfaces (referred to as functional interfaces) more compactly.
-
   + Method references provide easy-to-read lambda expressions for methods that already have a name.
-
   + Default methods enable new functionality to be added to the interfaces of libraries and ensure binary compatibility with code written for older versions of those interfaces.
-
   + Repeating Annotations provide the ability to apply the same annotation type more than once to the same declaration or type use.
-
   + Type Annotations provide the ability to apply an annotation anywhere a type is used, not just on a declaration. Used with a pluggable type system, this feature enables improved type checking of your code.
-
   + Improved type inference.
-
   + Method parameter reflection.
 
 ## [Collections](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/changes8.html)
-
   + Classes in the new `java.util.stream` package provide a Stream API to support functional-style operations on streams of elements. The Stream API is integrated into the Collections API, which enables bulk operations on collections, such as sequential or parallel map-reduce transformations.
-
-    + Performance Improvement for HashMaps with Key Collisions
+  + Performance Improvement for HashMaps with Key Collisions
 
 * [Compact Profiles](http://docs.oracle.com/javase/8/docs/technotes/guides/compactprofiles/) contain predefined subsets of the Java SE platform and enable applications that do not require the entire Platform to be deployed and run on small devices.
 
 * [Security](http://docs.oracle.com/javase/8/docs/technotes/guides/security/enhancements-8.html)
-
   + Client-side TLS 1.2 enabled by default
-
-  + New variant of AccessController.doPrivileged that enables code to assert a subset of its privileges, without preventing the full traversal of the stack to check for other permissions
-
+  + New variant of `AccessController.doPrivileged` that enables code to assert a subset of its privileges, without preventing the full traversal of the stack to check for other permissions
   + Stronger algorithms for password-based encryption
-
   + SSL/TLS Server Name Indication (SNI) Extension support in JSSE Server
-
   + Support for AEAD algorithms: The SunJCE provider is enhanced to support AES/GCM/NoPadding cipher implementation as well as GCM algorithm parameters. And the SunJSSE provider is enhanced to support AEAD mode based cipher suites. See Oracle Providers Documentation, JEP 115.
-
-  + KeyStore enhancements, including the new Domain KeyStore type java.security.DomainLoadStoreParameter, and the new command option -importpassword for the keytool utility
+  + KeyStore enhancements, including the new Domain KeyStore type `java.security.DomainLoadStoreParameter`, and the new command option -`importpassword` for the keytool utility
   + SHA-224 Message Digests
   + Enhanced Support for NSA Suite B Cryptography
   + Better Support for High Entropy Random Number Generation
-  + New java.security.cert.PKIXRevocationChecker class for configuring revocation checking of X.509 certificates
+  + New `java.security.cert.PKIXRevocationChecker` class for configuring revocation checking of X.509 certificates
   + 64-bit PKCS11 for Windows
   + New rcache Types in Kerberos 5 Replay Caching
   + Support for Kerberos 5 Protocol Transition and Constrained Delegation
@@ -55,12 +40,12 @@ Java Platform, Standard Edition 8 is a major feature release. This document summ
   + Support for server-side cipher suites preference customization in JSSE
 
 * [JavaFX](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm)
-  + The new Modena theme has been implemented in this release. For more information, see the blog at fxexperience.com.
-  + The new SwingNode class enables developers to embed Swing content into JavaFX applications. See the SwingNode javadoc and Embedding Swing Content in JavaFX Applications.
-  + The new UI Controls include the DatePicker and the TreeTableView controls.
-  + The javafx.print package provides the public classes for the JavaFX Printing API. See the javadoc for more information.
-  + The 3D Graphics features now include 3D shapes, camera, lights, subscene, material, picking, and antialiasing. The new Shape3D (Box, Cylinder, MeshView, and Sphere subclasses), SubScene, Material, PickResult, LightBase (AmbientLight and PointLight subclasses) , and SceneAntialiasing API classes have been added to the JavaFX 3D Graphics library. The Camera API class has also been updated in this release. See the corresponding class javadoc for javafx.scene.shape.Shape3D, javafx.scene.SubScene, javafx.scene.paint.Material, javafx.scene.input.PickResult, javafx.scene.SceneAntialiasing, and the Getting Started with JavaFX 3D Graphics document.
-  + The WebView class provides new features and improvements. Review Supported Features of HTML5 for more information about additional HTML5 features including Web Sockets, Web Workers, and Web Fonts.
+  + The new Modena theme has been implemented in this release. For more information, see the blog at [fxexperience.com](http://fxexperience.com/2013/03/modena-theme-update/).
+  + The new SwingNode class enables developers to embed Swing content into JavaFX applications. See the SwingNode javadoc and [Embedding Swing Content in JavaFX Applications](http://docs.oracle.com/javase/8/javafx/interoperability-tutorial/embed-swing.htm).
+  + The new UI Controls include the `DatePicker` and the `TreeTableView` controls.
+  + The `javafx.print` package provides the public classes for the JavaFX Printing API. See the javadoc for more information.
+  + The 3D Graphics features now include 3D shapes, camera, lights, subscene, material, picking, and antialiasing. The new `Shape3D (Box, Cylinder, MeshView`, and `Sphere subclasses`), `SubScene, Material, PickResult, LightBase (AmbientLight` and `PointLight subclasses`) , and `SceneAntialiasing API` classes have been added to the JavaFX 3D Graphics library. The Camera API class has also been updated in this release. See the corresponding class javadoc for `javafx.scene.shape.Shape3D, javafx.scene.SubScene, javafx.scene.paint.Material, javafx.scene.input.PickResult, javafx.scene.SceneAntialiasing`, and the [Getting Started with JavaFX 3D Graphics document](http://docs.oracle.com/javase/8/javafx/graphics-tutorial/javafx-3d-graphics.htm).
+  + The `WebView` class provides new features and improvements. Review [Supported Features of HTML5 for more information about additional HTML5 features](http://docs.oracle.com/javase/8/javafx/embedded-browser-tutorial/index.html) including Web Sockets, Web Workers, and Web Fonts.
   + Enhanced text support including bi-directional text and complex text scripts such as Thai and Hindi in controls, and multi-line, multi-style text in text nodes.
   + Support for Hi-DPI displays has been added in this release.
   + The CSS Styleable* classes became public API. See the javafx.css javadoc for more information.
@@ -68,22 +53,22 @@ Java Platform, Standard Edition 8 is a major feature release. This document summ
   + JavaFX is now available for ARM platforms. JDK for ARM includes the base, graphics and controls components of JavaFX.
 
 * [Tools](http://docs.oracle.com/javase/8/docs/technotes/tools/enhancements-8.html)
-  + The jjs command is provided to invoke the Nashorn engine.
-  + The java command launches JavaFX applications.
-  + The java man page has been reworked.
-  + The jdeps command-line tool is provided for analyzing class files.
+  + The `jjs` command is provided to invoke the Nashorn engine.
+  + The `java` command launches JavaFX applications.
+  + The `java man` page has been reworked.
+  + The `jdeps` command-line tool is provided for analyzing class files.
   + Java Management Extensions (JMX) provide remote access to diagnostic commands.
-  + The jarsigner tool has an option for requesting a signed time stamp from a Time Stamping Authority (TSA).
+  + The `jarsigner` tool has an option for requesting a signed time stamp from a Time Stamping Authority (TSA).
   + [Javac tool](http://docs.oracle.com/javase/8/docs/technotes/guides/javac/index.html)
-    * The -parameters option of the javac command can be used to store formal parameter names and enable the Reflection API to retrieve formal parameter names.
-    * The type rules for equality operators in the Java Language Specification (JLS) Section 15.21 are now correctly enforced by the javac command.
-    * The javac tool now has support for checking the content of javadoc comments for issues that could lead to various problems, such as invalid HTML or accessibility issues, in the files that are generated when javadoc is run. The feature is enabled by the new -Xdoclint option. For more details, see the output from running "javac -X". This feature is also available in the javadoc tool, and is enabled there by default.
-    * The javac tool now provides the ability to generate native headers, as needed. This removes the need to run the javah tool as a separate step in the build pipeline. The feature is enabled in javac by using the new -h option, which is used to specify a directory in which the header files should be written. Header files will be generated for any class which has either native methods, or constant fields annotated with a new annotation of type java.lang.annotation.Native.
+    * The `-parameters` option of the `javac` command can be used to store formal parameter names and enable the Reflection API to retrieve formal parameter names.
+    * The type rules for equality operators in the Java Language Specification (JLS) Section 15.21 are now correctly enforced by the `javac` command.
+    * The `javac` tool now has support for checking the content of `javadoc` comments for issues that could lead to various problems, such as invalid HTML or accessibility issues, in the files that are generated when `javadoc` is run. The feature is enabled by the new `-Xdoclint` option. For more details, see the output from running "javac -X". This feature is also available in the `javadoc` tool, and is enabled there by default.
+    * The `javac` tool now provides the ability to generate native headers, as needed. This removes the need to run the javah tool as a separate step in the build pipeline. The feature is enabled in `javac` by using the new `-h` option, which is used to specify a directory in which the header files should be written. Header files will be generated for any class which has either native methods, or constant fields annotated with a new annotation of type `java.lang.annotation.Native`.
 
   * [Javadoc tool](http://docs.oracle.com/javase/8/docs/technotes/guides/javadoc/whatsnew-8.html)
-    * The javadoc tool supports the new DocTree API that enables you to traverse Javadoc comments as abstract syntax trees.
-    * The javadoc tool supports the new Javadoc Access API that enables you to invoke the Javadoc tool directly from a Java application, without executing a new process. See the javadoc what's new page for more information.
-    * The javadoc tool now has support for checking the content of javadoc comments for issues that could lead to various problems, such as invalid HTML or accessibility issues, in the files that are generated when javadoc is run. The feature is enabled by default, and can also be controlled by the new -Xdoclint option. For more details, see the output from running "javadoc -X". This feature is also available in the javac tool, although it is not enabled by default there.
+    * The `javadoc` tool supports the new `DocTree` API that enables you to traverse Javadoc comments as abstract syntax trees.
+    * The `javadoc` tool supports the new Javadoc Access API that enables you to invoke the Javadoc tool directly from a Java application, without executing a new process. See the javadoc what's new page for more information.
+    * The `javadoc` tool now has support for checking the content of `javadoc` comments for issues that could lead to various problems, such as invalid HTML or accessibility issues, in the files that are generated when javadoc is run. The feature is enabled by default, and can also be controlled by the new `-Xdoclint` option. For more details, see the output from running "javadoc -X". This feature is also available in the `javac` tool, although it is not enabled by default there.
 
 * [Internationalization](http://docs.oracle.com/javase/8/docs/technotes/guides/intl/enhancements.8.html)
   + Unicode Enhancements, including support for Unicode 6.2.0
