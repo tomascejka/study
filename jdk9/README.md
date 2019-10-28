@@ -20,9 +20,12 @@
   + https://dzone.com/articles/the-java-platform-module-system?fromrel=true
   + https://blog.codefx.org/java/java-module-system-tutorial/
   + https://www.zoltanraffai.com/blog/the-java-platform-module-system/
++ Stream
+  + https://blog.codefx.org/java/java-9-stream/
 + Other
   + https://www.zoltanraffai.com/blog/java-9-performance-improvements/
   + https://www.jesperdj.com/2018/09/30/jaxb-on-java-9-10-11-and-beyond/ << JAXB problem
   + https://blog.codefx.org/java/java-9-migration-guide/
   + https://blog.joda.org/2018/09/from-java-8-to-java-11.html
   + https://docs.deistercloud.com/Technology.50/Java/Migration%20from%20java%208%20to%20java%209.xml?embedded=true
+  + https://blog.overops.com/5-features-in-java-9-that-will-change-how-you-develop-software-and-2-that-wont/
