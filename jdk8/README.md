@@ -38,6 +38,7 @@
   + https://dzone.com/articles/java-stream-collectors
 + FunctionalInterface
   + https://www.journaldev.com/2763/java-8-functional-interfaces
+  + https://www.baeldung.com/java-8-functional-interfaces#Functional
   + http://tutorials.jenkov.com/java-functional-programming/functional-interfaces.html
 + Default method
   + https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html
