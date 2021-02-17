@@ -1,0 +1,7 @@
+# @see https://dev.to/ablx/minimal-prometheus-setup-with-docker-compose-56mp
+groups:
+  - name: DemoAlerts
+    rules:
+      - alert: InstanceDown 
+        expr: up{job="services"} < 1 
+        for: 5m 

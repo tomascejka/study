@@ -1,0 +1,11 @@
+# ignoruj www, bat a txt soubory
+bin
+www
+src
+temp
+target/*.war
+*.bat
+*.md
+*.sh
+*.txt
+*.xml

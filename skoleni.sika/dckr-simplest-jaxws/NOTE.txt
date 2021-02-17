@@ -1,0 +1,37 @@
+Chyby:
+
+
+002 - batch script global_var.bat
+'global_var.bat' is not recognized as an internal or external command,
+operable program or batch file.
+-- RESULT: co a proc to vypisuje do konsole?
+
+## VYRESENO
+
+001 - mssql driver 
+07:12:34,567 ERROR [org.jboss.as.controller.management-operation] (Controller Boot Thread) WFLYCTL0013: Operation ("add") failed - address: ([
+    ("subsystem" => "datasources"),
+    ("data-source" => "nmDS")
+]) - failure description: {
+    "WFLYCTL0412: Required services that are not installed:" => ["jboss.jdbc-driver.MSSQL"],
+    "WFLYCTL0180: Services with missing/unavailable dependencies" => [
+        "org.wildfly.data-source.nmDS is missing [jboss.jdbc-driver.MSSQL]",
+        "jboss.driver-demander.java:jboss/datasources/nmDS is missing [jboss.jdbc-driver.MSSQL]"
+    ]
+}
+07:12:34,702 ERROR [org.jboss.as.controller.management-operation] (Controller Boot Thread) WFLYCTL0013: Operation ("add") failed - address: ([
+    ("subsystem" => "datasources"),
+    ("data-source" => "nmDS")
+]) - failure description: {
+    "WFLYCTL0412: Required services that are not installed:" => [
+        "jboss.jdbc-driver.MSSQL",
+        "jboss.jdbc-driver.MSSQL"
+    ],
+    "WFLYCTL0180: Services with missing/unavailable dependencies" => [
+        "org.wildfly.data-source.nmDS is missing [jboss.jdbc-driver.MSSQL]",
+        "jboss.driver-demander.java:jboss/datasources/nmDS is missing [jboss.jdbc-driver.MSSQL]",
+        "org.wildfly.data-source.nmDS is missing [jboss.jdbc-driver.MSSQL]"
+    ]
+}
+INFO: chybi mssql driver v modules, viz. https://goldmann.pl/blog/2014/07/23/customizing-the-configuration-of-the-wildfly-docker-image/
+-- RESULT: uspesne vyreseno, pridan adresar /modules s mssql driverem do projektu a pridano COPY /modules do Dockerfile

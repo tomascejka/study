@@ -1,0 +1,2 @@
+# @see https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file
+APP_VERSION=1.0-SNAPSHOT

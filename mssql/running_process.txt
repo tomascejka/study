@@ -1,0 +1,97 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-04T13:48:08+01:00
+
+====== running process ======
+Created pátek 04 leden 2019
+
+
+
+SELECT 
+ DB_NAME(sp.dbid) as DBName, ec.client_net_address, sp.*, ST.text
+FROM
+ sys.sysprocesses sp
+JOIN 
+ sys.dm_exec_connections ec on sp.spid = ec.session_id
+CROSS APPLY sys.dm_exec_sql_text(sp.sql_handle) AS ST
+WHERE 
+ sp.dbid > 0
+-- and loginame!='sodexo'
+ order by DB_NAME(sp.dbid);
+
+
+SELECT * 
+FROM 
+   sys.dm_exec_sessions s
+   LEFT  JOIN sys.dm_exec_connections c
+		ON  s.session_id = c.session_id
+   LEFT JOIN sys.dm_db_task_space_usage tsu
+		ON  tsu.session_id = s.session_id
+   LEFT JOIN sys.dm_os_tasks t
+		ON  t.session_id = tsu.session_id
+		AND t.request_id = tsu.request_id
+   LEFT JOIN sys.dm_exec_requests r
+		ON  r.session_id = tsu.session_id
+		AND r.request_id = tsu.request_id
+   OUTER APPLY sys.dm_exec_sql_text(r.sql_handle) TSQL
+
+**vrátí seznam běžících procesů**
+SELECT  *
+FROM    sys.dm_exec_requests  
+		CROSS APPLY sys.dm_exec_sql_text(sql_handle)  
+
+**vrátí seznam zámků**
+
+SELECT DTL.resource_type,  
+   CASE   
+	   WHEN DTL.resource_type IN ('DATABASE', 'FILE', 'METADATA') THEN DTL.resource_type  
+	   WHEN DTL.resource_type = 'OBJECT' THEN OBJECT_NAME(DTL.resource_associated_entity_id, SP.[dbid])  
+	   WHEN DTL.resource_type IN ('KEY', 'PAGE', 'RID') THEN   
+		   (  
+		   SELECT OBJECT_NAME([object_id])  
+		   FROM sys.partitions  
+		   WHERE sys.partitions.hobt_id =   
+			 DTL.resource_associated_entity_id  
+		   )  
+	   ELSE 'Unidentified'  
+   END AS requested_object_name, DTL.request_mode, DTL.request_status,  
+   DEST.TEXT, SP.spid, SP.blocked, SP.status, SP.loginame 
+FROM sys.dm_tran_locks DTL  
+   INNER JOIN sys.sysprocesses SP  
+	   ON DTL.request_session_id = SP.spid   
+   --INNER JOIN sys.[dm_exec_requests] AS SDER ON SP.[spid] = [SDER].[session_id] 
+   CROSS APPLY sys.dm_exec_sql_text(SP.sql_handle) AS DEST  
+WHERE SP.dbid = DB_ID()  
+   AND DTL.[resource_type] <> 'DATABASE' 
+ORDER BY DTL.[request_session_id];
+
+
+SELECT 
+db_name(rsc_dbid) AS 'DATABASE_NAME',
+case rsc_type when 1 then 'null'
+			  when 2 then 'DATABASE' 
+			  WHEN 3 THEN 'FILE'
+			  WHEN 4 THEN 'INDEX'
+			  WHEN 5 THEN 'TABLE'
+			  WHEN 6 THEN 'PAGE'
+			  WHEN 7 THEN 'KEY'
+			  WHEN 8 THEN 'EXTEND'
+			  WHEN 9 THEN 'RID ( ROW ID)'
+			  WHEN 10 THEN 'APPLICATION' end  AS 'REQUEST_TYPE',
+
+CASE req_ownertype WHEN 1 THEN 'TRANSACTION'
+				   WHEN 2 THEN 'CURSOR'
+				   WHEN 3 THEN 'SESSION'
+				   WHEN 4 THEN 'ExSESSION' END AS 'REQUEST_OWNERTYPE',
+
+OBJECT_NAME(rsc_objid ,rsc_dbid) AS 'OBJECT_NAME', 
+PROCESS.HOSTNAME , 
+PROCESS.program_name , 
+PROCESS.nt_domain , 
+PROCESS.nt_username , 
+PROCESS.program_name ,
+SQLTEXT.text 
+FROM sys.syslockinfo LOCK JOIN 
+	 sys.sysprocesses PROCESS
+  ON LOCK.req_spid = PROCESS.spid
+CROSS APPLY sys.dm_exec_sql_text(PROCESS.SQL_HANDLE) SQLTEXT

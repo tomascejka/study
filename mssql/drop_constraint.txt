@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-21T09:16:00+01:00
+
+====== drop constraint ======
+Created pondělí 21 leden 2019
+
+begin
+	declare @Command  nvarchar(1000)
+	SELECT 
+	@Command = 'alter table workshop_limit drop constraint ' + dc.Name
+	FROM sys.tables t
+		INNER JOIN sys.default_constraints dc ON t.object_id = dc.parent_object_id
+		INNER JOIN sys.columns c ON dc.parent_object_id = c.object_id AND c.column_id = dc.parent_column_id where t.Name = 'workshop_limit'
+	execute (@Command)
+	alter table workshop_limit drop column value 
+end

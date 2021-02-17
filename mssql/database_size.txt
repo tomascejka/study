@@ -1,0 +1,121 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-21T08:38:04+01:00
+
+====== database size ======
+Created pondělí 21 leden 2019
+
+**SHRINK DB**
+https://docs.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-shrinkdatabase-transact-sql?view=sql-server-2017
+DBCC SHRINKDATABASE (sdxcmdb, 10, TRUNCATEONLY)
+DBCC SHRINKDATABASE (sdxcmdb, 10)
+
+exec sp_spaceused service
+exec sp_helpfile --size je alokovaná, ne použitá
+DBCC SHRINKFILE (log, 10);  
+
+SELECT * 
+FROM sys.dm_db_log_space_usage; 
+
+ALTER DATABASE mir SET RECOVERY SIMPLE;
+DBCC SHRINKFILE (mir, 10);
+ALTER DATABASE mir SET RECOVERY FULL;
+
+**uvolní free space - neni pravda, nepouzivat**
+DBCC CLEANTABLE (0, service, 10000)
+
+**DB SIZE**
+SELECT 
+	t.NAME AS TableName,
+	s.Name AS SchemaName,
+	p.rows AS RowCounts,
+	SUM(a.total_pages) * 8 AS TotalSpaceKB, 
+	CAST(ROUND(((SUM(a.total_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS TotalSpaceMB,
+	SUM(a.used_pages) * 8 AS UsedSpaceKB, 
+	CAST(ROUND(((SUM(a.used_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS UsedSpaceMB, 
+	(SUM(a.total_pages) - SUM(a.used_pages)) * 8 AS UnusedSpaceKB,
+	CAST(ROUND(((SUM(a.total_pages) - SUM(a.used_pages)) * 8) / 1024.00, 2) AS NUMERIC(36, 2)) AS UnusedSpaceMB
+FROM 
+	sys.tables t
+INNER JOIN      
+	sys.indexes i ON t.OBJECT_ID = i.object_id
+INNER JOIN 
+	sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
+INNER JOIN 
+	sys.allocation_units a ON p.partition_id = a.container_id
+LEFT OUTER JOIN 
+	sys.schemas s ON t.schema_id = s.schema_id
+WHERE 
+	t.NAME NOT LIKE 'dt%' 
+	AND t.is_ms_shipped = 0
+	AND i.OBJECT_ID > 255 
+GROUP BY 
+	t.Name, s.Name, p.Rows
+ORDER BY 
+	t.Name
+
+**--zjisti obsazený misto**
+SELECT 
+	CAST(ROUND(((SUM(a.total_pages) * 8) / 1024.00 / 1024.00), 2) AS NUMERIC(36, 2)) AS TotalSpaceGB
+FROM 
+	sys.tables t
+INNER JOIN      
+	sys.indexes i ON t.OBJECT_ID = i.object_id
+INNER JOIN 
+	sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
+INNER JOIN 
+	sys.allocation_units a ON p.partition_id = a.container_id
+LEFT OUTER JOIN 
+	sys.schemas s ON t.schema_id = s.schema_id
+WHERE 
+	t.NAME NOT LIKE 'dt%' 
+	AND t.is_ms_shipped = 0
+	AND i.OBJECT_ID > 255 
+	
+**--zjisti celkove misto**
+exec sp_helpfile
+
+**ROW SIZE**
+begin
+declare @table nvarchar(128)
+declare @idcol nvarchar(128)
+declare @sql nvarchar(max)
+
+--initialize those two values
+set @table = 'service'
+set @idcol = '184711985'
+
+set @sql = 'select ' + @idcol +' , (0'
+
+select @sql = @sql + ' + isnull(datalength(' + name + '), 1)' 
+		from  sys.columns 
+		where object_id = object_id(@table)
+		and   is_computed = 0
+set @sql = @sql + ') as rowsize from ' + @table + ' order by rowsize desc'
+PRINT @sql
+end
+exec (@sql)
+
+
+**INDEX SIZE**
+SELECT [DatabaseName]
+	,[ObjectId]
+	,[ObjectName]
+	,[IndexId]
+	,[IndexDescription]
+	,CONVERT(DECIMAL(16, 1), (SUM([avg_record_size_in_bytes] * [record_count]) / (1024.0 * 1024))) AS [IndexSize(MB)]
+FROM (
+	SELECT DB_Name(Database_id) AS 'DatabaseName'
+		,OBJECT_ID AS ObjectId
+		,Object_Name(Object_id) AS ObjectName
+		,Index_ID AS IndexId
+		,Index_Type_Desc AS IndexDescription
+		,avg_record_size_in_bytes
+		,record_count
+	FROM sys.dm_db_index_physical_stats(db_id(), object_id ('dbo.attributeValue'), NULL, NULL, 'detailed')
+	) T
+GROUP BY DatabaseName
+	,ObjectId
+	,ObjectName
+	,IndexId
+	,IndexDescription;

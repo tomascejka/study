@@ -1,0 +1,65 @@
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+    volumes:
+      - grafana-volume:/var/lib/grafana
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      - monitoring
+    volumes:
+      - influxdb-volume:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=telegraf
+      - INFLUXDB_USER=telegraf
+      - INFLUXDB_USER_PASSWORD=tc
+      - INFLUXDB_ADMIN_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=tc
+  #
+  # TELEGRAPH - uprava konfiguracniho souboru, viz ./telegraf.conf
+  #
+  # @see https://docs.influxdata.com/telegraf/v1.17/administration/configuration/
+  # @see https://thenewstack.io/how-to-setup-influxdb-telegraf-and-grafana-on-docker-part-1/
+  # @see https://thenewstack.io/how-to-setup-influxdb-telegraf-and-grafana-on-docker-part-2/
+  # @see https://dev.to/project42/install-grafana-influxdb-telegraf-using-docker-compose-56e9
+  # @see https://towardsdatascience.com/get-system-metrics-for-5-min-with-docker-telegraf-influxdb-and-grafana-97cfd957f0ac
+  # @see https://lkhill.com/telegraf-influx-grafana-network-stats/
+  # @see https://www.influxdata.com/blog/configuring-the-docker-telegraf-input-plugin/ << nezkousel jsem!!
+  # @see https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker
+  #      
+  telegraf:
+    image: telegraf
+    container_name: telegraf
+    restart: always
+    extra_hosts:
+    # 172.22.0.0, 192.168.5.154
+     - "influxdb:192.168.5.154"
+    #environment:
+    #  HOST_PROC: /rootfs/proc
+    #  HOST_SYS: /rootfs/sys
+    #  HOST_ETC: /rootfs/etc
+    volumes:
+     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+     #- /var/run/docker.sock:/var/run/docker.sock:ro
+     #- /sys:/rootfs/sys:ro
+     #- /proc:/rootfs/proc:ro
+     #- /etc:/rootfs/etc:ro
+networks:
+  monitoring:
+volumes:
+  grafana-volume:
+    external: true
+  influxdb-volume:
+    external: true

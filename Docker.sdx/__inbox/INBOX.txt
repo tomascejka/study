@@ -1,0 +1,22 @@
+Odkazy
+
+* https://buildpacks.io/ << alternativa k dockerfile
+* https://www.youtube.com/watch?v=S8yRFarXvdQ&ab_channel=CodeLens << Creating Optimised Spring Boot Application Docker Images Using BuildPacks
+* https://www.tomaskubica.cz/post/2021/kubernetes-prakticky-external-dns/ << kubernetes a external DNS
+* https://medium.com/microservicegeeks/an-introduction-to-microservices-a3a7e2297ee0
+* https://medium.com/microservicegeeks/introduction-to-event-driven-architecture-e94ef442d824
+* https://medium.com/faun/azure-kubernetes-service-aks-d1e71c7ecbe6 << HOT, jak v azure naskriptovat AKS
+* https://azure.microsoft.com/cs-cz/resources/kubernetes-collection-host/ << materialy o K8
+* https://azure.microsoft.com/cs-cz/resources/ << ucebni materialy o azure
+
+Instalace - microsoft terminal
+* https://github.com/microsoft/terminal
+* https://github.com/microsoft/terminal#via-chocolatey-unofficial
+* https://devblogs.microsoft.com/commandline/
+* https://devblogs.microsoft.com/commandline/getting-started-with-windows-terminal/
+* https://www.youtube.com/watch?v=lu__oGZVT98&ab_channel=ScottHanselman << ladeni console ala awesome
+* https://docs.microsoft.com/cs-cz/windows/terminal/
+
+Stazeno
+https://1lib.eu/book/5701513/464d06?dsource=recommend
+https://1lib.eu/book/5294714/d785d4?dsource=recommend

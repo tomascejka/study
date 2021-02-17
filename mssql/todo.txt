@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-01T12:54:16+01:00
+
+====== todo ======
+Created pátek 01 březen 2019
+
+**sleevomat novy benefit**
+select * from eshop where id = 15696394 
+select * from benefit_tax_level where fk_eshop_id = 15696394
+select * from workshop where id = 15228033 --id z eshop.fk_workshop_id
+select * from workshop_workshop_attribute where fk_workshop_id = 15228033
+select * from workshop_limit wl join workshop_attribute wa on wl.fk_workshop_attribute_id = wa.id where wl.fk_workshop_attribute_id = 437788
+select * from one_account_type where id in (23,21)

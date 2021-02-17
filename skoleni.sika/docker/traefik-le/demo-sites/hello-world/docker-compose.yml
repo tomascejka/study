@@ -1,0 +1,23 @@
+version: '3.6'
+services:
+    example:
+        image: ondrejsika/go-hello-world:2
+        networks:
+             - traefik
+        labels:
+            # For Docker Compose Traefik Deployment (single node)
+            - traefik.frontend.rule=Host:${HOST:-hello-127-0-0-1.nip.io}
+            - traefik.enable=true
+        deploy:
+            labels:
+                # For Docker Swarm Traefik Deployment (cluster)
+                - traefik.frontend.rule=Host:${HOST:-hello-127-0-0-1.nip.io}
+                - traefik.enable=true
+                - traefik.port=80
+
+networks:
+    traefik:
+        external:
+            name: traefik
+
+# web. browser: http://hello-127-0-0-1.nip.io/

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/D:/Study/skoleni.sika/dckr-simplest-jaxws/src/main/resources/META-INF/wsdl/SimplestWebServiceApi.wsdl" uri="src/main/resources/jaxb/wsdl/SimplestWebServiceApi.wsdl"/>
+    <system systemId="file:/D:/Study/skoleni.sika/dckr-simplest-jaxws/src/main/resources/META-INF/wsdl/service.xsd" uri="src/main/resources/jaxb/wsdl/service.xsd"/>
+    <system systemId="file:/D:/Study/skoleni.sika/dckr-simplest-jaxws/src/main/resources/META-INF/wsdl/types.xsd" uri="src/main/resources/jaxb/wsdl/types.xsd"/>
+</catalog>

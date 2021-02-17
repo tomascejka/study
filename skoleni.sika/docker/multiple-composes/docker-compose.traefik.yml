@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  traefik:
+    image: traefik:1.7
+    command: |
+      --metrics \
+      --metrics.prometheus \
+      --metrics.prometheus.entryPoint="traefik" \
+      --api \
+      --web \
+      --docker \
+      --docker.watch \
+      --entryPoints="Name:http Address::80" \
+      --docker.exposedbydefault=false
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  counter:
+    deploy:
+      replicas: 15

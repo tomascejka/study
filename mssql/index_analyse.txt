@@ -1,0 +1,74 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-03T12:13:28+02:00
+
+====== index analyse ======
+Created středa 03 duben 2019
+
+> 5% and < = 30% 	ALTER INDEX REORGANIZE
+> 30% 	ALTER INDEX REBUILD WITH (ONLINE = ON) 
+
+alter index credit_order_fk_account_id_status on credit_order rebuild with (online = on, allow_page_locks = on, allow_row_locks = on) 
+alter index service_idInApplication_hidx on service reorganize 
+
+EXEC sp_helpindex 'dbo.service'
+
+--alter index UK_card_pan on card rebuild with (online = on, allow_page_locks = on, allow_row_locks = on);
+
+--, lob_compaction = on pro reorganize
+--Compress the table further by using archival compression.  
+ALTER INDEX cci_SimpleTable ON SimpleTable  
+REBUILD  
+WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE);  
+  
+--Remove the archive compression and only use columnstore compression.  
+ALTER INDEX cci_SimpleTable ON SimpleTable  
+REBUILD  
+WITH (DATA_COMPRESSION = COLUMNSTORE);  
+GO  
+**This is not a valid data compression setting for this object. It can only be used with columnstore indexes. Please choose NONE, PAGE, or ROW compression.**
+
+**vypočítá velikosti zabraného místa**
+SELECT [DatabaseName]
+	,[IndexName]
+	,[ObjectId]
+	,[ObjectName]
+	,[IndexId]
+	,[IndexDescription]
+	,CONVERT(DECIMAL(16, 1), (SUM([avg_record_size_in_bytes] * [record_count]) / (1024.0 * 1024))) AS [IndexSize(MB)]
+FROM (
+	SELECT DB_Name(IPS.Database_id) AS 'DatabaseName'
+		,SI.name AS 'IndexName'
+		,IPS.OBJECT_ID AS ObjectId
+		,Object_Name(IPS.Object_id) AS ObjectName
+		,IPS.Index_ID AS IndexId
+		,IPS.Index_Type_Desc AS IndexDescription
+		,IPS.avg_record_size_in_bytes
+		,IPS.record_count
+	FROM sys.dm_db_index_physical_stats(db_id(), object_id ('dbo.attributeValue'), NULL, NULL, 'detailed') IPS 
+			JOIN sys.tables ST WITH (nolock) ON IPS.object_id = ST.object_id
+	  JOIN sys.indexes SI WITH (nolock) ON IPS.object_id = SI.object_id AND IPS.index_id = SI.index_id
+	) T
+GROUP BY DatabaseName
+	,ObjectId
+	,ObjectName
+	,IndexId
+	,IndexDescription
+	,IndexName ;
+
+
+**vypočítá propcenta fragmentace**
+SELECT OBJECT_NAME(IPS.OBJECT_ID), IPS.page_count*8/1024 as sizeMB,IPS.index_id,SI.name as indexName, IPS.index_type_desc,IPS.index_level,
+IPS.avg_fragmentation_in_percent,IPS.avg_page_space_used_in_percent,IPS.page_count
+FROM sys.dm_db_index_physical_stats(DB_ID(N'AdventureWorksLT'), NULL, NULL, NULL , 'SAMPLED') IPS
+			JOIN sys.tables ST WITH (nolock) ON IPS.object_id = ST.object_id
+	  JOIN sys.indexes SI WITH (nolock) ON IPS.object_id = SI.object_id AND IPS.index_id = SI.index_id
+ORDER BY IPS.avg_fragmentation_in_percent DESC
+
+SELECT OBJECT_NAME(IPS.OBJECT_ID), IPS.page_count*8/1024 as sizeMB,IPS.index_id,SI.name as indexName, IPS.index_type_desc,IPS.index_level,
+IPS.avg_fragmentation_in_percent,IPS.avg_page_space_used_in_percent,IPS.page_count
+FROM sys.dm_db_index_physical_stats(DB_ID(N'AdventureWorksLT'), NULL, NULL, NULL , 'SAMPLED') IPS
+			JOIN sys.tables ST WITH (nolock) ON IPS.object_id = ST.object_id
+	  JOIN sys.indexes SI WITH (nolock) ON IPS.object_id = SI.object_id AND IPS.index_id = SI.index_id
+	  WHERE IPS.avg_fragmentation_in_percent >= 5 and (IPS.page_count*8/1024)>20
+ORDER BY IPS.avg_fragmentation_in_percent DESC

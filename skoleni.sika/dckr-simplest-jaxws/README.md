@@ -1,0 +1,1 @@
+# Simplest JAX-WS application

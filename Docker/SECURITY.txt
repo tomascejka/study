@@ -1,0 +1,4 @@
+Docker security
+
+1. proc nemit root-a v containeru
+- https://labs.f-secure.com/blog/abusing-the-access-to-mount-namespaces-through-procpidroot/

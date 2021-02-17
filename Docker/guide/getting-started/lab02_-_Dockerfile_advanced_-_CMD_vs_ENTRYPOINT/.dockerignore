@@ -1,0 +1,6 @@
+# ignoruj www, bat a txt soubory
+www
+temp
+bin
+*.bat
+*.txt

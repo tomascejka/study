@@ -1,0 +1,15 @@
+# Tomcat in Docker
+
+## Debugovani tomcat-u v docker
+
+$ docker run -it --rm \
+  -e JPDA_ADDRESS=8000 \
+  -e JPDA_TRANSPORT=dt_socket \
+  -p 8888:8080 \
+  -p 9000:8000 \
+  -v D:/tc/conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml \
+  tomcat:8.0 \
+  /usr/local/tomcat/bin/catalina.sh jpda run
+
+Zdroj - https://stackoverflow.com/questions/35584063/debugging-tomcat-in-docker-container
+--

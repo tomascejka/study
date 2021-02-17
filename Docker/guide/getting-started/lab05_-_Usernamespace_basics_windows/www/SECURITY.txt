@@ -1,0 +1,35 @@
+
+* https://docs.docker.com/engine/security/
+* https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e
+* https://docs.docker.com/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/
+* https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
+* https://dev-sec.io/baselines/docker/
+* https://github.com/OWASP/Docker-Security
+* https://www.katacoda.com/courses/docker-security/ << HOT, interactive wokrshop
+* https://towardsdatascience.com/top-20-docker-security-tips-81c41dd06f57
+* https://gist.github.com/avishayp/33fcee06ee440524d21600e2e817b6b7 << non root user example for alpine
+* https://github.com/danielguerra69/alpine-vnc/blob/master/Dockerfile << non root user, ale bacha dava mu sudo bez hesla!!!
+* https://jfrog.com/knowledge-base/3-essential-steps-to-securing-your-docker-container-deployments/
+* https://dadario.com.br/courses/docker-security-fundamentals/
+* https://ixis.co.uk/blog/docker-security-basics
+* https://www.redhat.com/en/topics/security/container-security
+* https://geekflare.com/securing-docker-for-production/ << HOT
+* https://medium.com/capital-one-tech/secure-docker-containers-require-secure-applications-75eb358abef9 << HOT, popisuje do detailu
+* https://sysdig.com/blog/7-docker-security-vulnerabilities/
+* https://blog.heroku.com/exploration-of-security-when-building-docker-containers << HOT, i s popisem utoku
+* https://anchore.com/blog/docker-security-best-practices-part-3-securing-container-images/ << v clanku jsou i dva odkazy na predesle casti serialu
+* https://arxiv.org/ftp/arxiv/papers/1804/1804.05039.pdf
+* https://thenewstack.io/docker-security-fundamentals-and-best-practices/
+* https://rollout.io/blog/is-docker-secure/
+* https://containerjournal.com/topics/container-security/securing-docker-containers-a-primer/ << zminuje nastroj Docker Bench (for security) ... proverit
+* https://www.twistlock.com/solutions/docker-security/
+* https://www.twistlock.com/2017/08/31/container-image-security-best-practices/
+* https://www.sqreen.com/resources/docker-security-best-practices
+* https://snyk.io/blog/10-docker-image-security-best-practices/
+
+Nastroje
+* https://sysdig.com/blog/20-docker-security-tools/
+* https://hackingpassion.com/ >> kali,parrot
+
+Placeny
+* https://linuxacademy.com/course/docker-security/

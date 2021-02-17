@@ -1,0 +1,66 @@
+#
+# @see https://docs.docker.com/compose/compose-file/
+#
+version: "3.8"
+
+#
+# Kontejnery, co jedna service to jeden kontejner
+#
+# @see https://github.com/ondrejsika/docker-training#build-compose
+#
+services:
+  # foo:
+  #   build: 
+  #     context: .
+  #     # @see - https://github.com/ondrejsika/docker-training#environment-variables
+  #     args: 
+  #       MSG: FOO
+  #   image: reg.istry.cz/ondrej/foo
+  # bar:
+  #   build: 
+  #     context: .
+  #     args: 
+  #       MSG: BAR
+  #   image: reg.istry.cz/ondrej/bar
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - 8000:80
+  #   volumes:
+  #     - ./www:/usr/share/nginx/html
+  # posgres:
+  #   image: postgres:13
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - data:/varlib/posgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: pg
+  # app:
+  #   image: debian
+  #   command: env
+  #   environment:
+  #     CC: CZ
+  #     BUILD_NO: 1
+  #     ENABLED: "true"
+  #     SESSION_SECRET:
+  # app2:
+  #   image: ondrejsika/go-hello-world:2
+  #   ports:
+  #     - 80:80
+  # app3:
+  #   image: debian
+  #   command: env
+  #   env_file:
+  #     - ./.env
+  #     - ./config.env 
+    app4:
+      image: ${IMAGE-hello-world}
+      deploy:
+        mode: replicated
+        replicas: 4
+        
+volumes:
+  data:
+    #
+

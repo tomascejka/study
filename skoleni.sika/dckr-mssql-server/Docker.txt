@@ -1,0 +1,46 @@
+Docker
+
+* udelat rest a soap backend do dockeru
+* vyjit z https://czsodexo.atlassian.net/browse/TIFITSD-311
+	- create new jira SSD task + sublinky
+* to vse nez zapracuji TS - version/zamky
+
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "<YourStrong@Passw0rd>"
+
+------------------------------
+MSSQL a docker
+------------------------------
+$ docker pull mcr.microsoft.com/mssql/server
+
+$ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=<YourStrong@Passw0rd>" `
+   -p 1433:1433 --name sql1 -h sql1 `
+   -d mcr.microsoft.com/mssql/server:2019-latest, viz. https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-cmd#pullandrun2019
+
+$ docker ps, zjistim, ze bezi mssql v kontaineru
+
+$ docker exec -it sql1 "bash", viz. https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-cmd#connect-to-sql-server
+--
+
+------------------------------
+MSSQL - dockerizace
+------------------------------
+Spusteni mssql v dockeru:
+
+1. docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=<YourStrong@Passw0rd>" `
+   -p 1433:1433 --name sql1 -h sql1 `
+   -d mcr.microsoft.com/mssql/server:2019-latest 
+
+2. Nebo via dockerfile, zdroj - https://www.softwaredeveloper.blog/initialize-mssql-in-docker-container
+FROM mcr.microsoft.com/mssql/server:2019-latest
+ENV SA_PASSWORD <YourStrong@Passw0rd>
+ENV ACCEPT_EULA Y
+--
+
+Prikazy:
+docker build . -t sql1
+docker run -d -p 1433:1433 --name sql1 sql1
+docker exec -it sql1 "bash"
+
+otevre se bash v containeru:
+$ /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "<YourStrong@Passw0rd>" -Q 'SELECT @@VERSION'
+--

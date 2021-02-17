@@ -1,0 +1,22 @@
+#
+# There's a target to learn about dockerfile. 
+# Motivation is build up own image for development.
+#
+# @author tomas.cejka
+#
+# @see https://medium.com/@ls12styler/docker-as-an-integrated-development-environment-95bc9b01d2c1
+#
+FROM alpine:latest
+
+RUN apk add -U --no-cache bash \
+# https://wiki.alpinelinux.org/wiki/Alpine_setup_scripts#setup-xorg-base
+  xorg-server xf86-video-vesa xf86-input-evdev xf86-input-mouse xf86-input-keyboard udev \
+# https://wiki.alpinelinux.org/wiki/Awesome(wm)_Setup
+  awesome feh lxterminal lua cairo-gobject pango xf86-video-intel xf86-input-synaptics \
+# https://wiki.alpinelinux.org/wiki/Setting_up_a_new_user
+  && adduser -D -s /bin/bash -h /home/tc tc \
+# https://wiki.alpinelinux.org/wiki/Awesome(wm)_Setup#Start_your_desktop
+  && echo 'awesome' >> /home/tc/.xinitrc \
+  && mkdir /home/tc/.config \
+  && cp -r /etc/xdg/awesome  /home/tc/.config \
+  && vi /home/tc/.config/awesome/rc.lua

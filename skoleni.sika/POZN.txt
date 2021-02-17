@@ -1,0 +1,36 @@
+
+Docker
+--------
+* udelat docker jaxrs s WADL
+	- tzn. vystavit pak WADL na URL
+* udelat docker jaxws/soap s WSDL, top-bottom
+	- tzn. vystavit pak WSDL na URL
+* udelat docker s app-db
+	- a zatim pro jaxws/soap aplikaci
+--
+
+Compose
+--------
+* pak napsat compose, kde toce/jaxrs zavisi na toce/jaxws a to zavisi na toce/app-db
+* a to zprovoznit, tzn. 
+	- via soapui (wadl) --> toce/jaxrs --> via toce/jaxws --> ulozi stav do app-db
+	- via soapui (wadl) --> toce/jaxrs --> precte si stav z app-db (nebo pujde pres toce/jaxws do toce/app-db) 
+--
+
+Swarm
+* to uz je vyssi divci, nepobral jsem
+
+Zdroje:
+* jak na dockerignore:
+	- https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/
+* raw pristup via jdbc/result API v java
+    - https://docs.oracle.com/javase/tutorial/jdbc/basics/sqldatasources.html
+	- https://docs.microsoft.com/en-us/sql/connect/jdbc/data-source-sample?view=sql-server-ver15
+	- https://www.journaldev.com/2509/java-datasource-jdbc-datasource-example
+* jak zaclenit MAVEN do docker flow:
+	- https://codefresh.io/howtos/using-docker-maven-maven-docker/
+	- https://github.com/fabric8io/docker-maven-plugin
+* sdileni via sharepoint
+* monitoring - SmallRye Metrics (implementace Eclipse MicroMetrics) viz. 2021-02-01 22:33:39,616 INFO  [io.smallrye.metrics] (MSC service thread 1-7) MicroProfile: Metrics activated (SmallRye Metrics version: 2.4.2)
+
+

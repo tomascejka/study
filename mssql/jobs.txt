@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-28T08:42:41+01:00
+
+====== jobs ======
+Created čtvrtek 28 únor 2019
+
+https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sql-server-agent-stored-procedures-transact-sql?view=sql-server-2017
+
+SELECT * FROM msdb.INFORMATION_SCHEMA.TABLES where table_name like '%job%' or table_name like '%sched%'
+SELECT * FROM msdb.dbo.sysjobs where job_id = '57693FB9-B960-46CC-887E-ED65F32EB3A5' ;
+SELECT * FROM msdb.dbo.sysjobschedules where job_id = '57693FB9-B960-46CC-887E-ED65F32EB3A5' ;
+SELECT * FROM msdb.dbo.sysschedules where schedule_uid = 'CB7AFC35-4012-4006-9E8C-84D524658F2F'
+SELECT * FROM msdb.dbo.sysjobactivity  where job_id = '57693FB9-B960-46CC-887E-ED65F32EB3A5' ;
+SELECT * FROM msdb.dbo.sysjobservers
+SELECT * FROM msdb.dbo.sysjobsteps; 
+--EXEC msdb.dbo.sp_start_job @job_name = N'TsCleaner' ; 
+
+
+EXEC msdb.dbo.sp_add_job @job_name = N'TsCleaner' ;
+EXEC msdb.dbo.sp_add_jobserver @job_name = N'TsCleaner' ;  
+EXEC msdb.dbo.sp_add_jobstep  
+	@job_name = N'TsCleaner',  
+	@step_name = N'TsMessageClean',  
+	@subsystem = N'TSQL',  
+	@command = N'exec SDXTS.dbo.prc_delete_job',   
+	@retry_attempts = 0,  
+	@retry_interval = 0 ;
+EXEC msdb.dbo.sp_add_schedule  
+	@schedule_name = N'TsCleanerSched' ,  
+	@freq_type = 4,  
+	@freq_interval = 1,  
+	@freq_subday_type = 8,    
+	@freq_recurrence_factor = 1,
+	@freq_subday_interval = 1 ;
+EXEC msdb.dbo.sp_attach_schedule
+   @job_name = N'TsCleaner',
+   @schedule_name = N'TsCleanerSched' ;

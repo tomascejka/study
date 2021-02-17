@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  # --- PROMETHEUS  
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command: 
+      - --web.enable-lifecycle  
+      - --config.file=/etc/prometheus/prometheus.yml
+  # --- GRAFANA
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+    volumes:
+      - grafana-volume:/var/lib/grafana
+networks:
+  monitoring:
+volumes:
+  prometheus-data:
+  grafana-volume:
+    external: true

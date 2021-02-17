@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hello-world-rs
+  labels:
+    app: hello-world-rs
+spec:
+  # pak je mozne nahlizet via kubectl get rs,po
+  # a zkouset via browser - http://127.0.0.1:8001/api/v1/namespaces/default/services/example/proxy/
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-world-rs
+  # stejne jako 01_pod.yml, slouzi jako sablona pro vytvareni POD-u
+  # zmena template nevede k refreshi na novou versi (resp. kdyz nezvysim replicas)!
+  template:
+    metadata:
+      labels:
+        app: hello-world-rs
+        svc: example
+    spec:
+      containers:
+        - name: hello-world
+          image: ondrejsika/go-hello-world:2
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi

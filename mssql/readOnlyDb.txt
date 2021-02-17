@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-22T09:44:45+01:00
+
+====== readOnlyDb ======
+Created pátek 22 březen 2019
+
+Ahoj, po nastavení Read Scale-Out funguje napojení na čtecí repliky.
+jdbc:sqlserver://sdxsql.database.windows.net:1433;applicationIntent=ReadOnly;databaseName=sdxtsdb;useUnicode=true;characterEncoding=UTF-8;
+:1433;applicationIntent=ReadOnly

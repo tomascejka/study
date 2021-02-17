@@ -1,0 +1,13 @@
+.settings
+.vscode
+bin
+src
+target/**
+!target/*.war
+.classpath
+.dockerignore
+.project
+*.bat
+*.sh
+NOTE.*
+pom.xml

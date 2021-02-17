@@ -1,0 +1,27 @@
+#
+# @see https://docs.docker.com/compose/compose-file/#compose-and-docker-compatibility-matrix
+#
+version: '3.3'
+
+#
+# @see https://docs.docker.com/compose/compose-file/#service-configuration-reference
+#
+services:
+  # rest_mimic_ping
+  ping-service:
+    # @see https://docs.docker.com/compose/compose-file/#build
+    build: ./rest-mimic_v1
+    # @see https://docs.docker.com/compose/compose-file/#volume-configuration-reference
+    volumes:
+      - ./rest-mimic_v1/src/main
+    ports:
+      - 8081:8080
+  # rest_mimic_pong
+  pong-service:
+    # @see https://docs.docker.com/compose/compose-file/#build
+    build: ./rest-mimic_v2
+    # @see https://docs.docker.com/compose/compose-file/#volume-configuration-reference
+    volumes:
+      - ./rest-mimic_v2/src/main
+    ports:
+      - 8082:8080

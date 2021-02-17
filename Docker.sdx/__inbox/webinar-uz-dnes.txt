@@ -1,0 +1,47 @@
+# Webinar, Webinář - Kubernetes v praxi - UŽ DNES / 2021/02/11, 14-15
+
+* uvedomit si jak se aplikace chova
+* stav aplikace komplikuje deploy
+* aplikace musi umet reagnovat na signaly, na loadbalancer-y
+	* tzn. operator provadi update infa a posila kubectl commandy
+	* a odstaveni od clusteru (mysleno uspani/vyvezeni z traficu) - provedeni infra/update by appka nemela poznat, nebo event. s timto stavem pracovat
+* 12-faktor metodika
+* sidecar pattern 
+
+## Dockerfile
+
+### Nevyhody
+* musi se umet psat efektivni dockerfile
+* vyvojar to nemusi vedet, umi jazyk/ne infra
+
+### Alternativa Buildpack
+* nefunguji na dev/local machine
+* je to nastroj
+* zajimava alternativa k dockerfile
+* cim vice budete mit dockerfile tim vice zacnete premyslet o jine alternative
+
+## Deployment proces
+* continuous integration/delivery/deployment
+* na DEV/UAT je to easy
+* na PROD je ale podlozeno pouze velkymi testovacimi sadami
+
+# Maintance
+* cluster pro kazde prostredi pro DEV, UAT, PROD
+* nedokazi se omezit zdroje, ktere K8 sdili mezi namespace/clustery
+* etcd je citlivy na latence v siti (dokaze shodit cluster)!!!
+* neroztahovat cluster pres vice datovych center/regionu !!!
+* poslendi dobou uz neni pozadavek na 2 dat. centra (hot/cold) ale standartem se stavá 3 datová centra (napr. redis ma ve svem setupu, podporu pro 3 regiony pro svou praci/scallingu)
+
+# Securitas
+- kontroller (jaky?), kt. yaml zasifrujou (nebo jeho atributy) a klic je jenom k8 clusteru, kt. si je zase rozsifruje - proc? no protoze maj vsechno v github.com
+- wave,callypo - sdn << to nevim, co je
+- otazka zni: ne/chceme pouzivate network-policies
+	- a vyznamne ovlivni dalsi postup
+
+# Správa K8S manifestů
+- deklarativni popis
+- helm + helmfile (nadstavba) - helm dalsi abstracke/dalsi manifest na spravu
+
+# Monitoring
+* prometheus+beaty+influxdb+grafana
+* elastic+kibana+slack na provoz team

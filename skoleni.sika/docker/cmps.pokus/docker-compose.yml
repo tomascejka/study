@@ -1,0 +1,17 @@
+#
+# @see https://docs.docker.com/compose/compose-file/
+#
+version: "3.8"
+
+#
+# Kontejnery, co jedna service to jeden kontejner
+#
+# @see https://github.com/ondrejsika/docker-training#build-compose
+#
+services:
+  foo:
+    #image: hello-world
+    build: ./foo
+  bar:
+    build: ./bar
+

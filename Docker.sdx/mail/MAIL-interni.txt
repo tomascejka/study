@@ -1,0 +1,41 @@
+-- predmet:Žádost o shrnutí minulého setkání, 2021/02/09
+Ahoj,
+
+Minule jste mne mile překvapili zápisem – mohu se prosím požádat o jeho zaslání?
+
+Docker/K8 přehled 
+-	Udělal jsem výstup (prozatím jenom z Docker, viz. presentace) – budu rozšiřovat dle potřeby (budu mít pak 12/2021 o čem presentovat)
+-	Dále jsem začal zkoumat monitoring a možnosti integrace do mého úkolu – (odloženo, až budu mít NTFM v Docker-u)
+-	Dockerizuju NTFM – zatím žádný blocker
+	-	Aktuálně jsem v bodě: přecházím na JDK11 a s tím řeším issue z toho vniknuvší << JSEM ZDE
+-	Čekám mě (bude předmětem zkoumání)
+	-	(ntfm-scope) dvou a více instancí – chování v kontejneru
+	-	(docker-scope) spuštění dvou a více instancí – via docker compose
+	-	(docker-scope) summary docker swarm – clustering nativně v Docker-u
+-	Napojit NTFM na monitoring
+	-	Interní, ve Wildfly má tzv. Eclipse-MicroProfile implementaci, 
+		-	Je nutné se naučit, jak to číst (ideálně Prometheus – nástroj z Grafana stacku)
+		-	Je nutné se naučit to vyčíst a vystavit v Docker-u (kontejner NESMI mit stav u sebe, podávat ho ven, např. via http )
+-	Napojit NTFM logging 
+	-	Tohle bude docela oříšek –když vidím, jak se staví k logování WSO2 do ElasticSearch
+	-	Logy NESMI byt v kontejneru
+		-	ZADNY STAV v kontejneru 
+		-	cluster manager jej muze kdykoli ZABIT a ZAHODIT (tzn. STAV je pryc – logy, a jiné výstupy do souborů v kontejneru)
+-	Udělat release pipeline pro NTFM modul
+	-	Nejdříve asi Docker-compose
+	-	Pak do Kubernetes clusteru
+	-	Zde bude nutný už i Váš zásah (určitě s týdením předstihem) << zařídit AKS u Sodexo (použijeme určitě ten pro POS-MODULE akorát budeme mít vlastní Kubernetes-Namespace)
+
+Přehled (granualizace na bázi jira ticketů)
+-	https://czsodexo.atlassian.net/browse/SSD-1349 << kontejnerizace SDX1
+	-	https://czsodexo.atlassian.net/browse/SSD-1353 << monitoring kontejneru
+	-	https://czsodexo.atlassian.net/browse/SSD-1361 << jak pracovat s logování kontejneru
+	-	https://czsodexo.atlassian.net/browse/SSD-1354 << automatický release management do azure	
+-	https://czsodexo.atlassian.net/browse/SSD-1355 << dockerizace NTFM
+	-	https://czsodexo.atlassian.net/browse/SSD-1379  << přechod na NTFM na JDK11 (pouze pro rozdíly oproti migrace na TS/JDK)
+
+S pozdravem
+
+Tomáš Čejka
+Tel: +420 733 539 684
+-- email end

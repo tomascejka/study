@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world-deploy
+  annotations:
+    kubernetes.io/change-cause: ver1
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: hello-world-deploy
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: hello-world-deploy
+        svc: example
+    spec:
+      containers:
+        - name: hello-world
+          # (tc) musi to byt v docker registry neumi to z localu
+          # - https://github.com/ondrejsika/docker-training#own-docker-registry
+          # - https://dev.to/rohansawant/how-to-setup-a-local-docker-registry-with-kubernetes-on-windows-includes-1-hidden-step-that-official-docs-doesn-t-320f
+          # - https://kubernetes.github.io/ingress-nginx/examples/docker-registry/
+          image: ondrejsika/go-hello-world:1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m
